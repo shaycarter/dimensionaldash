@@ -4,49 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversion Quest</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
     <style>
         /* CSS for styling */
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
         }
-        .container {
-            margin-top: 50px;
-        }
-        .conversion-box {
-            display: inline-block;
+        canvas {
             border: 2px solid #ccc;
-            padding: 10px;
-            margin: 10px;
-            cursor: pointer;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Conversion Quest: Leap of Faith</h1>
-    <div class="container">
-        <p>Convert 5 kilometers to meters:</p>
-        <div id="kilometers" class="conversion-box">5 km</div>
-        <div id="equal">=</div>
-        <div id="meters" class="conversion-box" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-    </div>
-
     <script>
-        // JavaScript for drag and drop functionality
-        function allowDrop(ev) {
-            ev.preventDefault();
+        // JavaScript for the game
+        var config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 200 }
+                }
+            },
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        var game = new Phaser.Game(config);
+
+        function preload() {
+            // Preload assets like images and sprites
+            this.load.image('background', 'background.jpg');
+            this.load.image('player', 'player.png');
+            this.load.image('kilometers', 'kilometers.png');
+            this.load.image('meters', 'meters.png');
         }
 
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
+        function create() {
+            // Create the game elements
+            this.add.image(400, 300, 'background');
+
+            this.player = this.physics.add.image(100, 450, 'player').setScale(0.5);
+
+            this.kilometers = this.physics.add.image(400, 300, 'kilometers').setScale(0.5);
+            this.kilometers.setInteractive();
+            this.input.setDraggable(this.kilometers);
+
+            this.meters = this.add.image(700, 300, 'meters').setScale(0.5);
+            this.meters.setInteractive();
+            this.input.setDraggable(this.meters);
+
+            this.input.on('dragstart', function (pointer, gameObject) {
+                gameObject.setTint(0xff0000);
+            });
+
+            this.input.on('dragend', function (pointer, gameObject) {
+                gameObject.clearTint();
+            });
+
+            this.input.on('drop', function (pointer, gameObject, dropZone) {
+                gameObject.x = dropZone.x;
+                gameObject.y = dropZone.y;
+                gameObject.input.enabled = false;
+            });
+
+            this.physics.add.overlap(this.kilometers, this.meters, function () {
+                // Player successfully converts kilometers to meters
+                console.log('Conversion complete!');
+            }, null, this);
         }
 
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
+        function update() {
+            // Game loop
         }
     </script>
 </body>
 </html>
-
