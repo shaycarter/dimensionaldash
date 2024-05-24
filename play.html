@@ -6,7 +6,7 @@
     <title>Unit Conversion Game</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
     <style>
-        body { margin: 0; background-color: #ffffff; }
+        body { margin: 0; }
         canvas { display: block; }
     </style>
 </head>
@@ -23,12 +23,6 @@
             type: Phaser.AUTO,
             width: 800,
             height: 600,
-            physics: {
-                default: 'arcade',
-                arcade: {
-                    gravity: { y: 200 }
-                }
-            },
             scene: {
                 preload: preload,
                 create: create,
@@ -44,8 +38,6 @@
         }
 
         function create() {
-            // Create game objects
-
             // Set background color
             this.cameras.main.setBackgroundColor('#ffffff');
 
@@ -69,40 +61,4 @@
             // Generate a random conversion factor based on the current level
             // For simplicity, let's assume the conversion factor is a simple multiplication factor
             targetConversionFactor = Phaser.Math.Between(2, 10); // Generate a random factor between 2 and 10
-            // Update game text
-            updateGameText();
-        }
-
-        function checkPlayerInput() {
-            // Check if the player has input the correct conversion factor
-            // Example: if (playerInput === targetConversionFactor) { handleCorrectConversion(); }
-        }
-
-        function handleCorrectConversion() {
-            // Update score
-            score += 10;
-            // Update level
-            level++;
-            // Generate a new conversion factor
-            generateConversionFactor();
-            // Update game text
-            updateGameText();
-        }
-
-        function updateGameText() {
-            // Update the text displaying score and level
-            gameText.setText(`Score: ${score} - Level: ${level}`);
-        }
-
-        function addButton(x, y, text, callback) {
-            // Helper function to create a button
-            const button = this.add.text(x, y, text, { fontSize: '24px', fill: '#000000' }).setInteractive();
-            button.on('pointerdown', callback);
-        }
-
-        // Add event listeners for player input (e.g., button clicks)
-        // Call appropriate functions based on player actions
-        // Example: addButton(400, 500, 'Submit', checkPlayerInput);
-    </script>
-</body>
-</html>
+            // Update g
