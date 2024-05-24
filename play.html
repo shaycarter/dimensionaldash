@@ -1,110 +1,94 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.6">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Quest</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <style>
+        /* CSS for styling */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Conversion Quest&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* CSS for styling */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f0f0f0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>canvas {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #ccc;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// JavaScript for the game</p>
-<p class="p1"><span class="Apple-converted-space">        </span>var config = {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>type: Phaser.AUTO,</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 800,</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 600,</p>
-<p class="p1"><span class="Apple-converted-space">            </span>physics: {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>default: 'arcade',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>arcade: {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>gravity: { y: 200 }</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>},</p>
-<p class="p1"><span class="Apple-converted-space">            </span>scene: {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>preload: preload,</p>
-<p class="p1"><span class="Apple-converted-space">                </span>create: create,</p>
-<p class="p1"><span class="Apple-converted-space">                </span>update: update</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>};</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>var game = new Phaser.Game(config);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function preload() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Preload assets like images and sprites</p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.load.image('background', 'background.jpg');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.load.image('player', 'player.png');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.load.image('kilometers', 'kilometers.png');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.load.image('meters', 'meters.png');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function create() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Create the game elements</p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.add.image(400, 300, 'background');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.player = this.physics.add.image(100, 450, 'player').setScale(0.5);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.kilometers = this.physics.add.image(400, 300, 'kilometers').setScale(0.5);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.kilometers.setInteractive();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.input.setDraggable(this.kilometers);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.meters = this.add.image(700, 300, 'meters').setScale(0.5);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.meters.setInteractive();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.input.setDraggable(this.meters);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.input.on('dragstart', function (pointer, gameObject) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>gameObject.setTint(0xff0000);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.input.on('dragend', function (pointer, gameObject) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>gameObject.clearTint();</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.input.on('drop', function (pointer, gameObject, dropZone) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>gameObject.x = dropZone.x;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>gameObject.y = dropZone.y;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>gameObject.input.enabled = false;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>this.physics.add.overlap(this.kilometers, this.meters, function () {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>// Player successfully converts kilometers to meters</p>
-<p class="p1"><span class="Apple-converted-space">                </span>console.log('Conversion complete!');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}, null, this);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>function update() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Game loop</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <script>
+        // JavaScript for the game
+        var config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 200 }
+                }
+            },
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        var game = new Phaser.Game(config);
+
+        function preload() {
+            // Preload assets like images and sprites
+            this.load.image('background', 'background.jpg');
+            this.load.image('player', 'player.png');
+            this.load.image('kilometers', 'kilometers.png');
+            this.load.image('meters', 'meters.png');
+        }
+
+        function create() {
+            // Create the game elements
+            this.add.image(400, 300, 'background');
+
+            this.player = this.physics.add.image(100, 450, 'player').setScale(0.5);
+
+            this.kilometers = this.physics.add.image(400, 300, 'kilometers').setScale(0.5);
+            this.kilometers.setInteractive();
+            this.input.setDraggable(this.kilometers);
+
+            this.meters = this.add.image(700, 300, 'meters').setScale(0.5);
+            this.meters.setInteractive();
+            this.input.setDraggable(this.meters);
+
+            this.input.on('dragstart', function (pointer, gameObject) {
+                gameObject.setTint(0xff0000);
+            });
+
+            this.input.on('dragend', function (pointer, gameObject) {
+                gameObject.clearTint();
+            });
+
+            this.input.on('drop', function (pointer, gameObject, dropZone) {
+                gameObject.x = dropZone.x;
+                gameObject.y = dropZone.y;
+                gameObject.input.enabled = false;
+            });
+
+            this.physics.add.overlap(this.kilometers, this.meters, function () {
+                // Player successfully converts kilometers to meters
+                console.log('Conversion complete!');
+            }, null, this);
+        }
+
+        function update() {
+            // Game loop
+        }
+    </script>
 </body>
 </html>
